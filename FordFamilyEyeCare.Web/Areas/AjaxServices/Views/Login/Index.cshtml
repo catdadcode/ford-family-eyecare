@@ -1,0 +1,31 @@
+﻿@model FordFamilyEyeCare.Web.Areas.AjaxServices.ViewModels.LoginViewModel
+<div id="loginBox">
+    <table>
+        <tr>
+            <td>
+                Username:
+            </td>
+            <td>
+                @Html.TextBoxFor(x => x.Username)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Password:
+            </td>
+            <td>
+                @Html.PasswordFor(x => x.Password)
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" style="text-align: right;">
+                <input id="cancelLogin" type="button" class="button" value="Cancel" /> <input id="submitLogin" type="button" class="button" value="Login" />
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" style="text-align: center;">
+                <span id="failed" style="color: #900;"></span>
+            </td>
+        </tr>
+    </table>
+</div>

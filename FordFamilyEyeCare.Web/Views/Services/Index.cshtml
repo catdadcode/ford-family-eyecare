@@ -1,0 +1,36 @@
+﻿@model FordFamilyEyeCare.Web.ViewModels.BasicContentViewModel
+@{
+    ViewBag.Title = "Index";
+}
+@if (Model.EditMode)
+{
+    using (Html.BeginForm("Upload", "Images", FormMethod.Post, new { enctype = "multipart/form-data", @class = "file_uploader" }))
+    {
+        <div>
+            <input type="file" name="file" multiple />
+            <br />
+            <input type="submit" value="Upload" />
+        </div>
+        <br />
+    }
+    using (Html.BeginForm("ChangeContent", "Services"))
+    {
+        <div>
+            @Html.TextAreaFor(x => x.Content, new { @class = "basicEditArea editor" })
+            <br />
+            <input id="save" class="button" type="submit" value="Save Changes" /> &nbsp;@Html.ActionLink("Cancel", "Index", "Services", null, new { @class = "navButton" })
+        </div>
+    }
+}
+else
+{
+    if (User.Identity.IsAuthenticated)
+    {
+        <div style="text-align: center;">
+            @Html.ActionLink("Edit this page", "Index", "Services", new { editMode = true }, new { @class = "navButton" })
+        </div>
+    }
+    <div>
+        @Model.Content
+    </div>
+}

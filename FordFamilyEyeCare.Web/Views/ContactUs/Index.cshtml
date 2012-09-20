@@ -1,0 +1,101 @@
+﻿@model FordFamilyEyeCare.Web.ViewModels.ContactUsViewModel
+@using CodeTunnel.MvcUtilities.Helpers;
+@{
+    ViewBag.Title = "Contact Us";
+}
+<style type="text/css">
+    #contactUs
+    {
+        font-family: Arial;
+    }
+    #contactUs form
+    {
+        padding: 15px;
+        border: solid 1px #858060;
+        border-radius: 15px;
+        width: 405px;
+        box-shadow: 5px 5px 5px #444;
+        background: #5C5741;
+    }
+    #contactUs td
+    {
+        vertical-align: top;
+    }
+</style>
+<div id="contactUs">
+    <table>
+        <tr>
+            <td>
+                @using (Html.BeginForm("Submit", "ContactUs"))
+                {
+                    <div>
+                        <div style="text-align: center; font-size: 12px;">
+                            * denotes required fields.</div>
+                        <br />
+                        *First Name: @Html.TextBoxFor(x => x.ContactInformation.FirstName, new { style = "width:250px;" })
+                        <br />
+                        <br />
+                        *Last Name: @Html.TextBoxFor(x => x.ContactInformation.LastName, new { style = "width:250px;" })
+                        <br />
+                        <br />
+                        *Phone Number: @Html.TextBoxFor(x => x.ContactInformation.PhoneNumber)
+                        <br />
+                        <br />
+                        Email: @Html.TextBoxFor(x => x.ContactInformation.Email, new { style = "width:250px;" })
+                        <br />
+                        <br />
+                        Address
+                        <br />
+                        <div style="border: dashed 0px #ffffff; display: inline-block; padding: 15px; background: #6C684D;">
+                            Street: @Html.TextBoxFor(x => x.ContactInformation.Street, new { style = "width:250px;" })
+                            <br />
+                            City: @Html.TextBoxFor(x => x.ContactInformation.City, new { style = "width:250px;" })
+                            <br />
+                            State: @Html.StateDropDownListFor(x => x.ContactInformation.State)
+                            <br />
+                            ZipCode: @Html.TextBoxFor(x => x.ContactInformation.ZipCode, new { style = "width:75px;" })
+                        </div>
+                        <br />
+                        <br />
+                        Insurance Information:
+                        <br />
+                        @Html.TextAreaFor(x => x.ContactInformation.AdditionalInformation, new { style = "width:400px; height: 150px;" })
+                        <br />
+                        <br />
+                        <input type="submit" class="button" value="Submit" />
+                    </div>
+                }
+            </td>
+            <td style="padding: 15px 0px 15px 25px;">
+                Fill out the form to the left and someone will contact you within 1 business day.
+                <br />
+                <br />
+                If you prefer to contact us directly you can call or email:
+                <br />
+                <br />
+                Email: <a href="mailto:@Model.Email">@Model.Email</a>
+                <br />
+                <br />
+                Phone: @Model.PhoneNumber
+                <br />
+                <br />
+                <hr />
+                <br />
+                @*Location:
+                <br />
+                <br />
+                @Model.AddressInformation
+                <h2>
+                    1411 Falls Ave. E.
+                    <br />
+                    Suite 105
+                    <br />
+                    Twin Falls, ID
+                </h2>*@
+                <div style="text-align: center;">
+                    <img style="width: 300px;" src="@Url.Content("~/content/images/frontdoor.jpg")" />
+                </div>
+            </td>
+        </tr>
+    </table>
+</div>

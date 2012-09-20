@@ -1,0 +1,624 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>CodeTunnel.MvcUtilities</name>
+    </assembly>
+    <members>
+        <member name="T:CodeTunnel.MvcUtilities.Helpers.HtmlHelpers">
+            <summary>
+            A library of useful HtmlHelpers.
+            </summary>
+        </member>
+        <member name="M:CodeTunnel.MvcUtilities.Helpers.HtmlHelpers.Markdown(System.Web.Mvc.HtmlHelper,System.String,System.Boolean)">
+            <summary>
+            HTML helper to transform Markdown syntax into valid HTML.asfas
+            </summary>
+            <param name="helper">The current HtmlHelper.</param>
+            <param name="text">The text to be transformed.</param>
+            <returns>MvcHtmlString</returns>
+        </member>
+        <member name="M:CodeTunnel.MvcUtilities.Helpers.HtmlHelpers.PageLinks(System.Web.Mvc.HtmlHelper,CodeTunnel.MvcUtilities.Objects.PagingInfo,System.Func{System.Int32,System.String})">
+            <summary>
+            Generates HTML paging links based on the specified PagingInfo.
+            </summary>
+            <param name="html">The current HtmlHelper.</param>
+            <param name="pagingInfo">The paging metadata to be used when creating the links.</param>
+            <param name="pageUrl">A function to return a valid URL with correct page number.</param>
+            <returns>MvcHtmlString</returns>
+        </member>
+        <member name="M:CodeTunnel.MvcUtilities.Helpers.HtmlHelpers.StateDropDownListFor``2(System.Web.Mvc.HtmlHelper{``0},System.Linq.Expressions.Expression{System.Func{``0,``1}})">
+            <summary>
+            Helper to create a drop down list pre-populated with all 50 states.
+            </summary>
+            <typeparam name="TModel">The type of the model.</typeparam>
+            <typeparam name="TValue">The type of the value.</typeparam>
+            <param name="html">The helper class to extend.</param>
+            <param name="expression">Lambda for binding the drop down to a model property.</param>
+            <returns>A standard drop down list pre-populated with all 50 states.</returns>
+        </member>
+        <member name="T:CodeTunnel.MvcUtilities.Utilities.MarkdownOptions">
+            <summary>
+            Publicly settable options for MarkdownSharp.
+            </summary>
+        </member>
+        <member name="P:CodeTunnel.MvcUtilities.Utilities.MarkdownOptions.AutoHyperlink">
+            <summary>
+            when true, (most) bare plain URLs are auto-hyperlinked
+            WARNING: this is a significant deviation from the markdown spec
+            </summary>
+        </member>
+        <member name="P:CodeTunnel.MvcUtilities.Utilities.MarkdownOptions.AutoNewlines">
+            <summary>
+            when true, RETURN becomes a literal newline
+            WARNING: this is a significant deviation from the markdown spec
+            </summary>
+        </member>
+        <member name="P:CodeTunnel.MvcUtilities.Utilities.MarkdownOptions.EmptyElementSuffix">
+            <summary>
+            use ">" for HTML output, or " />" for XHTML output
+            </summary>
+        </member>
+        <member name="P:CodeTunnel.MvcUtilities.Utilities.MarkdownOptions.EncodeProblemUrlCharacters">
+            <summary>
+            when true, problematic URL characters like [, ], (, and so forth will be encoded
+            WARNING: this is a significant deviation from the markdown spec
+            </summary>
+        </member>
+        <member name="P:CodeTunnel.MvcUtilities.Utilities.MarkdownOptions.LinkEmails">
+            <summary>
+            when false, email addresses will never be auto-linked
+            WARNING: this is a significant deviation from the markdown spec
+            </summary>
+        </member>
+        <member name="P:CodeTunnel.MvcUtilities.Utilities.MarkdownOptions.StrictBoldItalic">
+            <summary>
+            when true, bold and italic require non-word characters on either side
+            WARNING: this is a significant deviation from the markdown spec
+            </summary>
+        </member>
+        <member name="P:CodeTunnel.MvcUtilities.Utilities.MarkdownOptions.EncodeCodeBlocks">
+            <summary>
+            when true, text within code blocks will not be HTML encoded.
+            Use this when you are passing in pre-encoded text.
+            WARNING: do not use this if you are not handling the encoding yourself or you could be opening yourself up to security vulnerabilities.
+            </summary>
+        </member>
+        <member name="T:CodeTunnel.MvcUtilities.Utilities.Markdown">
+            <summary>
+            Markdown is a text-to-HTML conversion tool for web writers.
+            Markdown allows you to write using an easy-to-read, easy-to-write plain text format,
+            then convert it to structurally valid XHTML (or HTML).
+            </summary>
+        </member>
+        <member name="F:CodeTunnel.MvcUtilities.Utilities.Markdown._nestDepth">
+            <summary>
+            maximum nested depth of [] and () supported by the transform; implementation detail
+            </summary>
+        </member>
+        <member name="F:CodeTunnel.MvcUtilities.Utilities.Markdown._tabWidth">
+            <summary>
+            Tabs are automatically converted to spaces as part of the transform
+            this constant determines how "wide" those tabs become in spaces
+            </summary>
+        </member>
+        <member name="M:CodeTunnel.MvcUtilities.Utilities.Markdown.#ctor">
+            <summary>
+            Create a new Markdown instance using default options
+            </summary>
+        </member>
+        <member name="M:CodeTunnel.MvcUtilities.Utilities.Markdown.#ctor(System.Boolean)">
+             <summary>
+             Create a new Markdown instance and optionally load options from a configuration
+             file. There they should be stored in the appSettings section, available options are:
+            
+                 Markdown.StrictBoldItalic (true/false)
+                 Markdown.EmptyElementSuffix (">" or " />" without the quotes)
+                 Markdown.LinkEmails (true/false)
+                 Markdown.AutoNewLines (true/false)
+                 Markdown.AutoHyperlink (true/false)
+                 Markdown.EncodeProblemUrlCharacters (true/false)
+            
+             </summary>
+        </member>
+        <member name="M:CodeTunnel.MvcUtilities.Utilities.Markdown.#ctor(CodeTunnel.MvcUtilities.Utilities.MarkdownOptions)">
+            <summary>
+            Create a new Markdown instance and set the options from the MarkdownOptions object.
+            </summary>
+        </member>
+        <member name="M:CodeTunnel.MvcUtilities.Utilities.Markdown.#cctor">
+            <summary>
+            In the static constuctor we'll initialize what stays the same across all transforms.
+            </summary>
+        </member>
+        <member name="M:CodeTunnel.MvcUtilities.Utilities.Markdown.Transform(System.String)">
+            <summary>
+            Transforms the provided Markdown-formatted text to HTML;
+            see http://en.wikipedia.org/wiki/Markdown
+            </summary>
+            <remarks>
+            The order in which other subs are called here is
+            essential. Link and image substitutions need to happen before
+            EscapeSpecialChars(), so that any *'s or _'s in the a
+            and img tags get encoded.
+            </remarks>
+        </member>
+        <member name="M:CodeTunnel.MvcUtilities.Utilities.Markdown.RunBlockGamut(System.String,System.Boolean)">
+            <summary>
+            Perform transformations that form block-level tags like paragraphs, headers, and list items.
+            </summary>
+        </member>
+        <member name="M:CodeTunnel.MvcUtilities.Utilities.Markdown.RunSpanGamut(System.String)">
+            <summary>
+            Perform transformations that occur *within* block-level tags like paragraphs, headers, and list items.
+            </summary>
+        </member>
+        <member name="M:CodeTunnel.MvcUtilities.Utilities.Markdown.FormParagraphs(System.String,System.Boolean)">
+            <summary>
+            splits on two or more newlines, to form "paragraphs";
+            each paragraph is then unhashed (if it is a hash) or wrapped in HTML p tag
+            </summary>
+        </member>
+        <member name="M:CodeTunnel.MvcUtilities.Utilities.Markdown.GetNestedBracketsPattern">
+            <summary>
+            Reusable pattern to match balanced [brackets]. See Friedl's
+            "Mastering Regular Expressions", 2nd Ed., pp. 328-331.
+            </summary>
+        </member>
+        <member name="M:CodeTunnel.MvcUtilities.Utilities.Markdown.GetNestedParensPattern">
+            <summary>
+            Reusable pattern to match balanced (parens). See Friedl's
+            "Mastering Regular Expressions", 2nd Ed., pp. 328-331.
+            </summary>
+        </member>
+        <member name="M:CodeTunnel.MvcUtilities.Utilities.Markdown.StripLinkDefinitions(System.String)">
+            <summary>
+            Strips link definitions from text, stores the URLs and titles in hash references.
+            </summary>
+            <remarks>
+            ^[id]: url "optional title"
+            </remarks>
+        </member>
+        <member name="M:CodeTunnel.MvcUtilities.Utilities.Markdown.GetBlockPattern">
+            <summary>
+            derived pretty much verbatim from PHP Markdown
+            </summary>
+        </member>
+        <member name="M:CodeTunnel.MvcUtilities.Utilities.Markdown.HashHTMLBlocks(System.String)">
+            <summary>
+            replaces any block-level HTML blocks with hash entries
+            </summary>
+        </member>
+        <member name="M:CodeTunnel.MvcUtilities.Utilities.Markdown.TokenizeHTML(System.String)">
+            <summary>
+            returns an array of HTML tokens comprising the input string. Each token is
+            either a tag (possibly with nested, tags contained therein, such
+            as &lt;a href="&lt;MTFoo&gt;"&gt;, or a run of text between tags. Each element of the
+            array is a two-element array; the first is either 'tag' or 'text'; the second is
+            the actual value.
+            </summary>
+        </member>
+        <member name="M:CodeTunnel.MvcUtilities.Utilities.Markdown.DoAnchors(System.String)">
+            <summary>
+            Turn Markdown link shortcuts into HTML anchor tags
+            </summary>
+            <remarks>
+            [link text](url "title")
+            [link text][id]
+            [id]
+            </remarks>
+        </member>
+        <member name="M:CodeTunnel.MvcUtilities.Utilities.Markdown.DoImages(System.String)">
+            <summary>
+            Turn Markdown image shortcuts into HTML img tags.
+            </summary>
+            <remarks>
+            ![alt text][id]
+            ![alt text](url "optional title")
+            </remarks>
+        </member>
+        <member name="M:CodeTunnel.MvcUtilities.Utilities.Markdown.DoHeaders(System.String)">
+             <summary>
+             Turn Markdown headers into HTML header tags
+             </summary>
+             <remarks>
+             Header 1
+             ========
+            
+             Header 2
+             --------
+            
+             # Header 1
+             ## Header 2
+             ## Header 2 with closing hashes ##
+             ...
+             ###### Header 6
+             </remarks>
+        </member>
+        <member name="M:CodeTunnel.MvcUtilities.Utilities.Markdown.DoHorizontalRules(System.String)">
+            <summary>
+            Turn Markdown horizontal rules into HTML hr tags
+            </summary>
+            <remarks>
+            ***
+            * * *
+            ---
+            - - -
+            </remarks>
+        </member>
+        <member name="M:CodeTunnel.MvcUtilities.Utilities.Markdown.DoLists(System.String)">
+            <summary>
+            Turn Markdown lists into HTML ul and ol and li tags
+            </summary>
+        </member>
+        <member name="M:CodeTunnel.MvcUtilities.Utilities.Markdown.ProcessListItems(System.String,System.String)">
+            <summary>
+            Process the contents of a single ordered or unordered list, splitting it
+            into individual list items.
+            </summary>
+        </member>
+        <member name="M:CodeTunnel.MvcUtilities.Utilities.Markdown.DoCodeBlocks(System.String)">
+            <summary>
+            /// Turn Markdown 4-space indented code into HTML pre code blocks
+            </summary>
+        </member>
+        <member name="M:CodeTunnel.MvcUtilities.Utilities.Markdown.DoCodeSpans(System.String)">
+            <summary>
+            Turn Markdown `code spans` into HTML code tags
+            </summary>
+        </member>
+        <member name="M:CodeTunnel.MvcUtilities.Utilities.Markdown.DoItalicsAndBold(System.String)">
+            <summary>
+            Turn Markdown *italics* and **bold** into HTML strong and em tags
+            </summary>
+        </member>
+        <member name="M:CodeTunnel.MvcUtilities.Utilities.Markdown.DoHardBreaks(System.String)">
+            <summary>
+            Turn markdown line breaks (two space at end of line) into HTML break tags
+            </summary>
+        </member>
+        <member name="M:CodeTunnel.MvcUtilities.Utilities.Markdown.DoBlockQuotes(System.String)">
+            <summary>
+            Turn Markdown > quoted blocks into HTML blockquote blocks
+            </summary>
+        </member>
+        <member name="M:CodeTunnel.MvcUtilities.Utilities.Markdown.DoAutoLinks(System.String)">
+            <summary>
+            Turn angle-delimited URLs into HTML anchor tags
+            </summary>
+            <remarks>
+            &lt;http://www.example.com&gt;
+            </remarks>
+        </member>
+        <member name="M:CodeTunnel.MvcUtilities.Utilities.Markdown.Outdent(System.String)">
+            <summary>
+            Remove one level of line-leading spaces
+            </summary>
+        </member>
+        <member name="M:CodeTunnel.MvcUtilities.Utilities.Markdown.EncodeEmailAddress(System.String)">
+            <summary>
+            encodes email address randomly
+            roughly 10% raw, 45% hex, 45% dec
+            note that @ is always encoded and : never is
+            </summary>
+        </member>
+        <member name="M:CodeTunnel.MvcUtilities.Utilities.Markdown.EncodeCode(System.String)">
+            <summary>
+            Encode/escape certain Markdown characters inside code blocks and spans where they are literals
+            </summary>
+        </member>
+        <member name="M:CodeTunnel.MvcUtilities.Utilities.Markdown.EncodeAmpsAndAngles(System.String)">
+            <summary>
+            Encode any ampersands (that aren't part of an HTML entity) and left or right angle brackets
+            </summary>
+        </member>
+        <member name="M:CodeTunnel.MvcUtilities.Utilities.Markdown.EscapeBackslashes(System.String)">
+            <summary>
+            Encodes any escaped characters such as \`, \*, \[ etc
+            </summary>
+        </member>
+        <member name="M:CodeTunnel.MvcUtilities.Utilities.Markdown.Unescape(System.String)">
+            <summary>
+            swap back in all the special characters we've hidden
+            </summary>
+        </member>
+        <member name="M:CodeTunnel.MvcUtilities.Utilities.Markdown.EscapeBoldItalic(System.String)">
+            <summary>
+            escapes Bold [ * ] and Italic [ _ ] characters
+            </summary>
+        </member>
+        <member name="M:CodeTunnel.MvcUtilities.Utilities.Markdown.EncodeProblemUrlChars(System.String)">
+            <summary>
+            hex-encodes some unusual "problem" chars in URLs to avoid URL detection problems
+            </summary>
+        </member>
+        <member name="M:CodeTunnel.MvcUtilities.Utilities.Markdown.EscapeSpecialCharsWithinTagAttributes(System.String)">
+            <summary>
+            Within tags -- meaning between &lt; and &gt; -- encode [\ ` * _] so they
+            don't conflict with their use in Markdown for code, italics and strong.
+            We're replacing each such character with its corresponding hash
+            value; this is likely overkill, but it should prevent us from colliding
+            with the escape values by accident.
+            </summary>
+        </member>
+        <member name="M:CodeTunnel.MvcUtilities.Utilities.Markdown.Normalize(System.String)">
+            <summary>
+            convert all tabs to _tabWidth spaces;
+            standardizes line endings from DOS (CR LF) or Mac (CR) to UNIX (LF);
+            makes sure text ends with a couple of newlines;
+            removes any blank lines (only spaces) in the text
+            </summary>
+        </member>
+        <member name="M:CodeTunnel.MvcUtilities.Utilities.Markdown.RepeatString(System.String,System.Int32)">
+            <summary>
+            this is to emulate what's evailable in PHP
+            </summary>
+        </member>
+        <member name="P:CodeTunnel.MvcUtilities.Utilities.Markdown.EmptyElementSuffix">
+            <summary>
+            use ">" for HTML output, or " />" for XHTML output
+            </summary>
+        </member>
+        <member name="P:CodeTunnel.MvcUtilities.Utilities.Markdown.LinkEmails">
+            <summary>
+            when false, email addresses will never be auto-linked
+            WARNING: this is a significant deviation from the markdown spec
+            </summary>
+        </member>
+        <member name="P:CodeTunnel.MvcUtilities.Utilities.Markdown.StrictBoldItalic">
+            <summary>
+            when true, bold and italic require non-word characters on either side
+            WARNING: this is a significant deviation from the markdown spec
+            </summary>
+        </member>
+        <member name="P:CodeTunnel.MvcUtilities.Utilities.Markdown.AutoNewLines">
+            <summary>
+            when true, RETURN becomes a literal newline
+            WARNING: this is a significant deviation from the markdown spec
+            </summary>
+        </member>
+        <member name="P:CodeTunnel.MvcUtilities.Utilities.Markdown.AutoHyperlink">
+            <summary>
+            when true, (most) bare plain URLs are auto-hyperlinked
+            WARNING: this is a significant deviation from the markdown spec
+            </summary>
+        </member>
+        <member name="P:CodeTunnel.MvcUtilities.Utilities.Markdown.EncodeProblemUrlCharacters">
+            <summary>
+            when true, problematic URL characters like [, ], (, and so forth will be encoded
+            WARNING: this is a significant deviation from the markdown spec
+            </summary>
+        </member>
+        <member name="P:CodeTunnel.MvcUtilities.Utilities.Markdown.EncodeCodeBlocks">
+            <summary>
+            when false, text to be rendered as a code block or inline code will not be encoded
+            WARNING: do not use this if you are not encoding the input yourself as you will open yourself up to security risks
+            </summary>
+        </member>
+        <member name="P:CodeTunnel.MvcUtilities.Utilities.Markdown.Version">
+            <summary>
+            current version of MarkdownSharp;
+            see http://code.google.com/p/markdownsharp/ for the latest code or to contribute
+            </summary>
+        </member>
+        <member name="T:CodeTunnel.MvcUtilities.Validators.EmailAttribute">
+            <summary>
+            Attribute used to validate an email address.
+            </summary>
+        </member>
+        <member name="M:CodeTunnel.MvcUtilities.Validators.EmailAttribute.#ctor">
+            <summary>
+            Call base constructor and pass in email regular expression.
+            </summary>
+        </member>
+        <member name="T:CodeTunnel.MvcUtilities.ExtensionMethods.StringExtensions">
+            <summary>
+            Extension methods for string objects.
+            </summary>
+        </member>
+        <member name="M:CodeTunnel.MvcUtilities.ExtensionMethods.StringExtensions.TruncateOnSpace(System.String,System.Int32)">
+            <summary>
+            Truncates string at index of space closest to maxLength.
+            </summary>
+            <param name="text">String value to be truncated.</param>
+            <param name="maxLength">The maximum length of the truncated string.</param>
+            <returns>string</returns>
+        </member>
+        <member name="T:CodeTunnel.MvcUtilities.Validators.UrlAttribute">
+            <summary>
+            Validation attribute for URLs.
+            </summary>
+        </member>
+        <member name="M:CodeTunnel.MvcUtilities.Validators.UrlAttribute.#ctor">
+            <summary>
+            Call base constructor and pass in URL regular expression.
+            </summary>
+        </member>
+        <member name="T:CodeTunnel.MvcUtilities.Objects.PagingInfo">
+            <summary>
+            Metadata describing pages of data. Used for generating paging links.
+            </summary>
+        </member>
+        <member name="P:CodeTunnel.MvcUtilities.Objects.PagingInfo.TotalItems">
+            <summary>
+            Total number of items to be paged through.
+            </summary>
+        </member>
+        <member name="P:CodeTunnel.MvcUtilities.Objects.PagingInfo.ItemsPerPage">
+            <summary>
+            Number of items to display on each page.
+            </summary>
+        </member>
+        <member name="P:CodeTunnel.MvcUtilities.Objects.PagingInfo.CurrentPage">
+            <summary>
+            Current page number.
+            </summary>
+        </member>
+        <member name="P:CodeTunnel.MvcUtilities.Objects.PagingInfo.TotalPages">
+            <summary>
+            The total number of pages.
+            </summary>
+        </member>
+        <member name="T:CodeTunnel.MvcUtilities.Helpers.UrlHelpers">
+            <summary>
+            A library of useful UrlHelpers.
+            </summary>
+        </member>
+        <member name="M:CodeTunnel.MvcUtilities.Helpers.UrlHelpers.ToFriendlyUrl(System.Web.Mvc.UrlHelper,System.String)">
+            <summary>
+            Transforms a string into a human-readable, URL friendly string.
+            </summary>
+            <param name="helper">The current HtmlHelper.</param>
+            <param name="text">The text to be transformed.</param>
+            <returns>string</returns>
+        </member>
+        <member name="T:CodeTunnel.MvcUtilities.Attributes.AkismentCheckAttribute">
+            <summary>
+            Attributes related to Akismet.
+            </summary>
+        </member>
+        <member name="M:CodeTunnel.MvcUtilities.Attributes.AkismentCheckAttribute.OnActionExecuting(System.Web.Mvc.ActionExecutingContext)">
+            <summary>
+            Communicates with Akismet to check for spam.
+            </summary>
+            <param name="filterContext">The current ActionExecutingContext.</param>
+        </member>
+        <member name="T:CodeTunnel.MvcUtilities.Utilities.MarkdownUtils">
+            <summary>
+            Useful utilities related to Markdown.
+            </summary>
+        </member>
+        <member name="M:CodeTunnel.MvcUtilities.Utilities.MarkdownUtils.FormatMarkdown(System.String,System.Boolean)">
+            <summary>
+            Transforms Markdown syntax into valid HTML.
+            </summary>
+            <param name="markdownText">The text to be transformed.</param>
+            <returns>string</returns>
+        </member>
+        <member name="T:CodeTunnel.MvcUtilities.Objects.CollectionPage`1">
+            <summary>
+            Holds relevant information related to a page of a collection of information.
+            </summary>
+        </member>
+        <member name="P:CodeTunnel.MvcUtilities.Objects.CollectionPage`1.Items">
+            <summary>
+            A page of items.
+            </summary>
+        </member>
+        <member name="P:CodeTunnel.MvcUtilities.Objects.CollectionPage`1.TotalItems">
+            <summary>
+            Total number of items, regardless of page.
+            </summary>
+        </member>
+        <member name="T:CodeTunnel.MvcUtilities.ExtensionMethods.DateTimeExtensions">
+            <summary>
+            Extensions for DateTime objects.
+            </summary>
+        </member>
+        <member name="M:CodeTunnel.MvcUtilities.ExtensionMethods.DateTimeExtensions.TimePassed(System.DateTime)">
+            <summary>
+            Total time passed since specified date.
+            </summary>
+            <param name="dateTime">Date to subtract from current date.</param>
+            <returns>string</returns>
+        </member>
+        <member name="M:CodeTunnel.MvcUtilities.ExtensionMethods.DateTimeExtensions.Pluralize(System.Int32,System.String)">
+            <summary>
+            Pluralizes the specified noun, based on the specified count.
+            </summary>
+            <param name="num">The count.</param>
+            <param name="noun">Noun, pluralizable by adding 's' to the end.</param>
+            <returns>string</returns>
+        </member>
+        <member name="T:CodeTunnel.MvcUtilities.Components.DependencyResolvingModelBinder">
+            <summary>
+            A DefaultModelBinder extension that checks the built-in DependencyResolver when model binding.
+            </summary>
+        </member>
+        <member name="M:CodeTunnel.MvcUtilities.Components.DependencyResolvingModelBinder.CreateModel(System.Web.Mvc.ControllerContext,System.Web.Mvc.ModelBindingContext,System.Type)">
+            <summary>
+            An override that checks DependencyResolver when creating a model.
+            </summary>
+        </member>
+        <member name="T:CodeTunnel.MvcUtilities.Components.AjaxHeaderPreservationController">
+            <summary>
+            Base controller that ensures that the X-Requested-With header is preserved across redirects.
+            Note: Firefox contains a bug that does not forward this header across redirects.
+            This class is need if you want to use Request.IsAjaxRequest() in your controllers and views.
+            </summary>
+        </member>
+        <member name="F:CodeTunnel.MvcUtilities.Components.AjaxHeaderPreservationController._X_Requested_With_Header">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:CodeTunnel.MvcUtilities.Components.AjaxHeaderPreservationController.OnActionExecuting(System.Web.Mvc.ActionExecutingContext)">
+            <summary>
+            Checks TempData for stored header value. If there is a value and Request.IsAjaxRequest()
+            is false then it adds the value from TempData to the request headers. This ensures future
+            calls to Request.IsAjaxRequest() behave appropriately.
+            </summary>
+        </member>
+        <member name="M:CodeTunnel.MvcUtilities.Components.AjaxHeaderPreservationController.OnActionExecuted(System.Web.Mvc.ActionExecutedContext)">
+            <summary>
+            After action executes we check to see if a redirect result is being returned. If so, then
+            we store the value of the X-Requested-With header in TempData to be read back after the
+            redirect.
+            </summary>
+        </member>
+        <member name="M:CodeTunnel.MvcUtilities.Components.AjaxHeaderPreservationController.IsRedirectResult(System.Web.Mvc.ActionResult)">
+            <summary>
+            Identifies if an ActionResult's type contains the word "Redirect".
+            </summary>
+        </member>
+        <member name="T:CodeTunnel.MvcUtilities.Utilities.CommonUtils">
+            <summary>
+            A library of common static utilities.
+            </summary>
+        </member>
+        <member name="M:CodeTunnel.MvcUtilities.Utilities.CommonUtils.CreateFriendlyUrl(System.String)">
+            <summary>
+            Transforms a string into a human-readable, URL friendly string.
+            </summary>
+            <param name="text">The text to be transformed.</param>
+            <returns>string</returns>
+        </member>
+        <member name="M:CodeTunnel.MvcUtilities.Utilities.CommonUtils.RenderViewToString(System.Web.Mvc.Controller,System.String,System.Object,System.Boolean)">
+            <summary>
+            Builds and renders a View or Partial View to a string.
+            </summary>
+            <param name="controller">The current controller.</param>
+            <param name="viewName">The name of the View to be rendered.</param>
+            <param name="model">The object model to be passed to the View.</param>
+            <param name="isPartial">Is this a Partial View?</param>
+            <returns></returns>
+        </member>
+        <member name="F:CodeTunnel.MvcUtilities.Utilities.CommonUtils._tags">
+            <summary>
+            All HTML tags regular expression.
+            </summary>
+        </member>
+        <member name="F:CodeTunnel.MvcUtilities.Utilities.CommonUtils._whitelist">
+            <summary>
+            All allowed HTML tags regular expression.
+            </summary>
+        </member>
+        <member name="F:CodeTunnel.MvcUtilities.Utilities.CommonUtils._whitelist_a">
+            <summary>
+            Allowed HTML attributes for the 'a' tag.
+            </summary>
+        </member>
+        <member name="F:CodeTunnel.MvcUtilities.Utilities.CommonUtils._whitelist_img">
+            <summary>
+            Allowed HTML attributes for the 'img' tag.
+            </summary>
+        </member>
+        <member name="M:CodeTunnel.MvcUtilities.Utilities.CommonUtils.Sanitize(System.String)">
+            <summary>
+            Sanitize any potentially dangerous tags from the provided raw HTML input using
+            a whitelist based approach, leaving the "safe" HTML tags
+            </summary>
+            <param name="html">HTML to be sanitized.</param>
+            <returns>string</returns>
+        </member>
+    </members>
+</doc>

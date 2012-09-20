@@ -1,0 +1,170 @@
+﻿body 
+{
+    background-color: #858060;
+    background-image: url(/Content/images/backgroundGradient.jpg);
+    background-repeat: repeat-x;
+}
+
+#frame
+{
+    margin: auto;
+    width: 1000px;
+    border: solid 0px #000;
+    border-radius: 15px;
+    box-shadow: 10px 10px 50px #333;
+}
+
+#banner
+{
+    height: 300px;
+    border-radius: 15px 15px 0px 0px;
+    background-image: url(/Content/images/FordFamily.jpg);
+    background-repeat: repeat-x;
+    background-color: #4D5D6D;
+    text-align: right;
+    cursor: pointer;
+}
+
+#navigation
+{
+    height: 50px;
+    background: url(/Content/images/navGradient.jpg);
+    background-repeat: repeat-x;
+    font-size: 17px;
+    color: #ffffff;
+    font-family: Arial;
+    font-weight: bold;
+}
+#navigation td.button
+{
+    height: 40px;
+    vertical-align: middle;
+    text-align: center;
+    padding: 5px 10px 5px 10px;
+}
+#navigation td.button:hover, #navigation .selected
+{
+    background-repeat:repeat-x;
+    cursor: pointer;
+}
+#navigation td.button:hover
+{
+    background-image: url(/Content/images/buttonHoverGradient.jpg);
+}
+#navigation .selected
+{
+    background-image: url(/Content/images/buttonGradient.jpg);
+}
+#navigation td.divider
+{
+    width: 0px;
+    border-left: solid 1px #1C3352;
+    border-right: solid 1px #657282;
+    border-top: none;
+    border-bottom: none;
+}
+
+#mainContent
+{
+    min-height: 650px;
+    background: #4D5D6D;
+    padding: 15px;
+    color: #ffffff;
+}
+
+#footer
+{
+    height: 75px;
+    font-family: Arial;
+    font-size: 11px;
+    background: url(/Content/images/footerGradient.jpg);
+    background-repeat: repeat-x;
+    border-radius: 0px 0px 15px 15px;
+}
+
+hr
+{
+    border-top-color: #6F86A5;
+    border-bottom-color: #7F97b6;
+    border-right: none;
+    border-left: none;
+}
+
+a:link, a:hover, a:visited
+{
+    color: #ffffbb;
+}
+
+a.white:link, a.white:hover, a.white:visited
+{
+    color: #ffffff;
+    text-decoration: none;
+}
+
+#login, #logout
+{
+    font-family: Arial;
+    position: fixed;
+    top: 0px;
+    right: 0px;
+    padding: 10px;
+    background: #800;
+    border: none;
+    border-radius: 0px 0px 0px 15px;
+    box-shadow: 5px 5px 5px #444;
+    cursor: pointer;
+    color: #fff;
+    font-weight: bold;
+}
+
+#login:hover, #logout:hover
+{
+    background: #a44;
+}
+
+#loginBox
+{
+    background: #4D5D6D;
+    color: #fff;
+    font-family: Arial;
+    padding: 15px;
+    border-radius: 5px;
+}
+
+input.button, .qq-upload-button
+{
+    background: #c9c4a4;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    padding: 5px;
+    box-shadow: 3px 3px 3px #444;
+    font-family: Arial;
+}
+
+input.button:hover, .qq-upload-button:hover
+{
+    background: #ebe6c6;
+}
+
+
+button.link 
+{
+    font-size: 11pt;
+    font-family: Arial, Sans-Serif;
+    font-weight: 700;
+    text-decoration: underline;
+    color: #ffffbb;
+	text-align: left;
+	background: none;
+	margin: 0;
+	padding: 0;
+	border: none;
+	cursor: pointer;
+}
+
+.basicEditArea
+{
+    width: 100%;
+    height: 300px;
+}
