@@ -161,7 +161,6 @@
     <Content Include="Content\Images\Logo.png" />
     <Content Include="Content\Images\navGradient.jpg" />
     <Content Include="Content\Images\yellow.jpg" />
-    <Content Include="Content\OfficeForms\ajax-loader.gif" />
     <Content Include="Global.asax" />
     <Content Include="Areas\AjaxServices\Views\Login\Index.cshtml" />
     <Content Include="Areas\AjaxServices\Views\Web.config" />
@@ -239,6 +238,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\AjaxServices\Views\Shared\" />
+    <Folder Include="Content\OfficeForms\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
