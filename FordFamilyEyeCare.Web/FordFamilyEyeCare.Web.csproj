@@ -197,6 +197,18 @@
     <Content Include="Styles\images\toolbar.gif" />
     <Content Include="Styles\jquery.cleditor.css" />
     <Content Include="Styles\Site.css" />
+    <Content Include="UploadedContent\images\php908OYRPM.jpeg" />
+    <Content Include="UploadedContent\images\phpb0X53KPM.jpeg" />
+    <Content Include="UploadedContent\images\phpDE6Gu4AM.jpeg" />
+    <Content Include="UploadedContent\images\phpfaSpwvPM.jpeg" />
+    <Content Include="UploadedContent\images\phpGUQUNJAM.jpeg" />
+    <Content Include="UploadedContent\images\phplk8Vt4AM.jpeg" />
+    <Content Include="UploadedContent\images\phplN8ckrAM.jpeg" />
+    <Content Include="UploadedContent\images\phpLyrD6XAM.jpeg" />
+    <Content Include="UploadedContent\images\phpnZyFRMPM.jpeg" />
+    <Content Include="UploadedContent\images\phpSEDAynPM.jpeg" />
+    <Content Include="UploadedContent\images\phpTkpeL2PM.jpeg" />
+    <Content Include="UploadedContent\images\phpYVFUTEAM.jpeg" />
     <Content Include="Views\Home\Index.cshtml">
       <SubType>Code</SubType>
     </Content>
