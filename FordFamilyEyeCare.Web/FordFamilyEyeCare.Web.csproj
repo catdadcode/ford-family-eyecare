@@ -118,6 +118,7 @@
     <Compile Include="Controllers\ContactUsController.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Controllers\iCareController.cs" />
     <Compile Include="Controllers\HomeController.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -234,6 +235,7 @@
     <Content Include="Views\PracticeInfo\Index.cshtml" />
     <Content Include="Views\Services\Index.cshtml" />
     <Content Include="Views\Shared\Message.cshtml" />
+    <Content Include="Views\iCare\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
