@@ -15,16 +15,23 @@ namespace FordFamilyEyeCare.Web.Controllers
 
         public ActionResult Index(bool editMode = false)
         {
-            var existingForms = Directory.GetFiles(Server.MapPath(FormDirectory))
-                .Select(x => Path.GetFileName(x))
-                .ToList();
-
-            var viewModel = new OfficeFormsViewModel
+            try
             {
-                EditMode = editMode,
-                ExistingForms = existingForms
-            };
-            return View(viewModel);
+                var existingForms = Directory.GetFiles(Server.MapPath(FormDirectory))
+                    .Select(x => Path.GetFileName(x))
+                    .ToList();
+
+                var viewModel = new OfficeFormsViewModel
+                {
+                    EditMode = editMode,
+                    ExistingForms = existingForms
+                };
+                return View(viewModel);
+            }
+            catch (Exception ex)
+            {
+                return Content(ex.Message);
+            }
         }
 
         public ActionResult DeleteForm(string name)
