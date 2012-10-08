@@ -165,8 +165,6 @@
     <Content Include="Areas\AjaxServices\Views\Login\Index.cshtml" />
     <Content Include="Areas\AjaxServices\Views\Web.config" />
     <Content Include="Content\Images\FordFamily.psd" />
-    <Content Include="Content\OfficeForms\sample.pdf" />
-    <None Include="Content\Images\sample.zip" />
     <None Include="Properties\PublishProfiles\AWS.pubxml" />
     <Content Include="Scripts\fileuploader.js" />
     <Content Include="Scripts\jquery.cleditor.js" />
@@ -240,6 +238,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\AjaxServices\Views\Shared\" />
+    <Folder Include="Content\OfficeForms\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
