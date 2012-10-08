@@ -143,6 +143,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\BasicContentViewModel.cs" />
     <Compile Include="ViewModels\ContactUsViewModel.cs" />
+    <Compile Include="ViewModels\OfficeFormsViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\EmailTemplates\AppointmentRequest.htm" />
@@ -225,6 +226,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\AjaxServices\Views\Shared\" />
+    <Folder Include="Content\OfficeForms\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>

@@ -5,36 +5,39 @@ using System.Web;
 using System.Web.Mvc;
 using FordFamilyEyeCare.Domain.Repositories.Interfaces;
 using FordFamilyEyeCare.Web.ViewModels;
+using System.IO;
 
 namespace FordFamilyEyeCare.Web.Controllers
 {
     public class OfficeFormsController : Controller
     {
-        private IVariableRepository _variableRepository;
-
-        public OfficeFormsController(IVariableRepository variableRepository)
-        {
-            this._variableRepository = variableRepository;
-        }
+        private const string FormDirectory = "~/content/officeforms/";
 
         public ActionResult Index(bool editMode = false)
         {
-            var viewModel = new BasicContentViewModel
+            var existingForms = Directory.GetFiles(Server.MapPath(FormDirectory))
+                .Select(x => Path.GetFileName(x))
+                .ToList();
+
+            var viewModel = new OfficeFormsViewModel
             {
-                EditMode = User.Identity.IsAuthenticated && editMode,
-                Content = MvcHtmlString.Create(_variableRepository.Get("OfficeFormsContent").Value)
+                EditMode = editMode,
+                ExistingForms = existingForms
             };
             return View(viewModel);
         }
 
-        [HttpPost]
-        [ValidateInput(false)]
-        public ActionResult ChangeContent(string content)
+        public ActionResult DeleteForm(string name)
         {
-            var variable = _variableRepository.Get("OfficeFormsContent");
-            variable.Value = content;
-            _variableRepository.SaveChanges();
-            return RedirectToAction("Index");
+            System.IO.File.Delete(Path.Combine(Server.MapPath(FormDirectory), name));
+            return RedirectToAction("Index", new { editMode = true });
+        }
+
+        public ActionResult UploadForm(HttpPostedFileBase newForm)
+        {
+            string path = Path.Combine(Server.MapPath(FormDirectory), Path.GetFileName(newForm.FileName));
+            newForm.SaveAs(path);
+            return RedirectToAction("Index", new { editMode = true });
         }
     }
 }
